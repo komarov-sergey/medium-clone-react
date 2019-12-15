@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {BrowserRouter as Router} from 'react-router-dom'
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
-import Routes from 'routes'
-import TopBar from 'components/topBar'
+import Routes from "routes";
+import TopBar from "components/topBar";
 
 const App = () => {
   return (
@@ -13,7 +13,7 @@ const App = () => {
         <Routes />
       </Router>
     </div>
-  )
-}
+  );
+};
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById("root"));
