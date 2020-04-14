@@ -1,11 +1,9 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 
-// import log from 'utils/utils'
 import useFetch from 'hooks/useFetch'
 import useLocalStorage from 'hooks/useLocalStorage'
 import {CurrentUserContext} from 'contexts/currentUser'
-import BackendErrorMessages from 'pages/authentication/components/backendErrorMessages'
 
 const Authentication = props => {
   const isLogin = props.match.path === '/login'
@@ -16,16 +14,16 @@ const Authentication = props => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [username, setUsername] = useState('')
+  const [{isLoading, response}, doFetch] = useFetch(apiUrl)
   const [isSuccessfullSubmit, setIsSuccessfullSubmit] = useState(false)
-  const [{isLoading, response, error}, doFetch] = useFetch(apiUrl)
   const [, setToken] = useLocalStorage('token')
-  const [, setCurrentUserState] = useContext(CurrentUserContext)
+  const [, dispatch] = useContext(CurrentUserContext)
 
   const handleSubmit = event => {
     event.preventDefault()
 
     const user = isLogin ? {email, password} : {email, password, username}
-    
+
     doFetch({
       method: 'post',
       data: {
@@ -40,16 +38,11 @@ const Authentication = props => {
     }
     setToken(response.user.token)
     setIsSuccessfullSubmit(true)
-    setCurrentUserState(state => ({
-      ...state,
-      isLoggedIn: true,
-      isLoading: false,
-      currentUser: response.user
-    }))
-  }, [response, setToken, setCurrentUserState])
+    dispatch({type: 'SET_AUTHORIDED', payload: response.user })
+  }, [response, setToken, dispatch])
 
   if (isSuccessfullSubmit) {
-    return <Redirect to='/' />
+    return <Redirect to="/" />
   }
 
   return (
@@ -62,7 +55,6 @@ const Authentication = props => {
               <Link to={descriptionLink}>{descriptionText}</Link>
             </p>
             <form onSubmit={handleSubmit}>
-              {error && <BackendErrorMessages backendErrors={error.errors} />}
               <fieldset>
                 {!isLogin && (
                   <fieldset className="form-group">
@@ -94,9 +86,9 @@ const Authentication = props => {
                   />
                 </fieldset>
                 <button
+                  disabled={isLoading}
                   className="btn btn-lg btn-primary pull-xs-right"
                   type="submit"
-                  disabled={isLoading}
                 >
                   {pageTitle}
                 </button>
