@@ -5,7 +5,7 @@ import useFetch from 'hooks/useFetch'
 import useLocalStorage from 'hooks/useLocalStorage'
 import {CurrentUserContext} from 'contexts/currentUser'
 
-const Authentication = props => {
+const Authentication = (props) => {
   const isLogin = props.match.path === '/login'
   const pageTitle = isLogin ? 'Sign In' : 'Sign Up'
   const descriptionLink = isLogin ? '/register' : '/login'
@@ -19,7 +19,7 @@ const Authentication = props => {
   const [, setToken] = useLocalStorage('token')
   const [, dispatch] = useContext(CurrentUserContext)
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault()
 
     const user = isLogin ? {email, password} : {email, password, username}
@@ -27,8 +27,8 @@ const Authentication = props => {
     doFetch({
       method: 'post',
       data: {
-        user
-      }
+        user,
+      },
     })
   }
 
@@ -38,7 +38,7 @@ const Authentication = props => {
     }
     setToken(response.user.token)
     setIsSuccessfullSubmit(true)
-    dispatch({type: 'SET_AUTHORIDED', payload: response.user })
+    dispatch({type: 'SET_AUTHORIZED', payload: response.user})
   }, [response, setToken, dispatch])
 
   if (isSuccessfullSubmit) {
@@ -63,7 +63,7 @@ const Authentication = props => {
                       className="form-control form-control-lg"
                       placeholder="Username"
                       value={username}
-                      onChange={e => setUsername(e.target.value)}
+                      onChange={(e) => setUsername(e.target.value)}
                     />
                   </fieldset>
                 )}
@@ -73,7 +73,7 @@ const Authentication = props => {
                     className="form-control form-control-lg"
                     placeholder="Email"
                     value={email}
-                    onChange={e => setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </fieldset>
                 <fieldset className="form-group">
@@ -82,7 +82,7 @@ const Authentication = props => {
                     className="form-control form-control-lg"
                     placeholder="Password"
                     value={password}
-                    onChange={e => setPassword(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </fieldset>
                 <button

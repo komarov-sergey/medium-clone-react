@@ -24,6 +24,10 @@ const ArticleForm = ({onSubmit, errors, initialValues}) => {
       return
     }
 
+    if (!Object.keys(initialValues).length > 0) {
+      return
+    }
+
     setTitle(initialValues.title)
     setDescription(initialValues.description)
     setBody(initialValues.body)
