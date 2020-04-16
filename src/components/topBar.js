@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, {useContext} from 'react'
 import {NavLink, Link} from 'react-router-dom'
 
 import {CurrentUserContext} from 'contexts/currentUser'
@@ -35,14 +35,27 @@ const Topbar = () => {
           {currentUserState.isLoggedIn && (
             <>
               <li className="nav-item">
-                <NavLink to="/articles/new" className='nav-link'>
-                  <i className="ion-compose"></i>
-                  &nbsp; New Post
+                <NavLink to="/articles/new" className="nav-link">
+                  <i className="ion-gear-a"></i>
+                  &nbsp; New post
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to={`/profiles/${currentUserState.currentUser.username}`} className='nav-link'>
-                  <img className="user-pic" src={currentUserState.currentUser.image} alt='' />
+                <NavLink to="/settings" className="nav-link">
+                  <i className="ion-compose"></i>
+                  &nbsp; Settings
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  to={`/profiles/${currentUserState.currentUser.username}`}
+                  className="nav-link"
+                >
+                  <img
+                    className="user-pic"
+                    src={currentUserState.currentUser.image}
+                    alt=""
+                  />
                   &nbsp; {currentUserState.currentUser.username}
                 </NavLink>
               </li>
