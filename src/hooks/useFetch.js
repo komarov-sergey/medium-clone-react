@@ -18,6 +18,7 @@ export default (url) => {
   }, [])
 
   useEffect(() => {
+    let skipGetResponseAfterDestroy = false
     const requestOptions = {
       ...options,
       ...{
@@ -32,15 +33,21 @@ export default (url) => {
 
     axios(baseUrl + url, requestOptions)
       .then((res) => {
-        log('success', res)
-        setIsLoading(false)
-        setResponse(res.data)
+        if (!skipGetResponseAfterDestroy) {
+          setIsLoading(false)
+          setResponse(res.data)
+        }
       })
       .catch((error) => {
-        log('error', error)
-        setIsLoading(false)
-        setError(error.response.data)
+        if (!skipGetResponseAfterDestroy) {
+          setIsLoading(false)
+          setError(error.response.data)
+        }
       })
+
+    return () => {
+      skipGetResponseAfterDestroy = true
+    }
   }, [isLoading, options, url, token])
 
   return [{isLoading, response, error}, doFetch]
