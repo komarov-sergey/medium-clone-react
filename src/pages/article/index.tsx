@@ -1,6 +1,6 @@
 // @ts-nocheck
 import {useEffect, useContext, useState} from 'react'
-import {Link, redirect} from 'react-router-dom'
+import {Link, redirect, useParams} from 'react-router-dom'
 
 import useFetch from 'hooks/useFetch'
 import Loading from 'components/loading'
@@ -8,8 +8,9 @@ import ErrorMessage from 'components/errorMessage'
 import TagList from 'components/TagList'
 import {CurrentUserContext} from 'contexts/currentUser'
 
-const Article = (props) => {
-  const slug = props.match.params.slug
+const Article = () => {
+  const params = useParams()
+  const slug = params.slug
   const apiUrl = `/articles/${slug}`
   const [
     {

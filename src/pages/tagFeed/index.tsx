@@ -1,6 +1,7 @@
 // @ts-nocheck
-import React, {useEffect, Fragment} from 'react'
+import {useEffect, Fragment} from 'react'
 import {stringify} from 'query-string'
+import {useLocation, useParams} from 'react-router-dom'
 
 import useFetch from 'hooks/useFetch'
 import Feed from 'components/feed'
@@ -11,8 +12,11 @@ import Loading from 'components/loading'
 import ErrorMessage from 'components/errorMessage'
 import FeedToggler from 'components/feedTogler'
 
-const TagFeed = ({location, match}) => {
-  const tagName = match.params.slug
+const TagFeed = () => {
+  const location = useLocation()
+  const params = useParams()
+  const tagName = params.slug
+
   const {offset, currentPage} = getPaginator(location.search)
   const stringifiedParams = stringify({
     limit,
@@ -21,7 +25,7 @@ const TagFeed = ({location, match}) => {
   })
   const apiUrl = `/articles?${stringifiedParams}`
   const [{response, isLoading, error}, doFetch] = useFetch(apiUrl)
-  const url = match.url
+  const url = location.pathname
 
   useEffect(() => {
     doFetch()

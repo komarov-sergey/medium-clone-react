@@ -1,6 +1,7 @@
 // @ts-nocheck
-import React, {useEffect} from 'react'
+import {useEffect} from 'react'
 import {stringify} from 'query-string'
+import {useLocation} from 'react-router-dom'
 
 import {getPaginator, limit} from 'utils'
 import useFetch from 'hooks/useFetch'
@@ -17,7 +18,8 @@ const getApiUrl = ({username, offset, isFavorites}) => {
   return `/articles?${stringify(params)}`
 }
 
-const UserArticles = ({username, location, isFavorites, url}) => {
+const UserArticles = ({username, isFavorites, url}) => {
+  const location = useLocation()
   const {offset, currentPage} = getPaginator(location.search)
   const apiUrl = getApiUrl({username, offset, isFavorites})
   const [{response, isLoading, error}, doFetch] = useFetch(apiUrl)

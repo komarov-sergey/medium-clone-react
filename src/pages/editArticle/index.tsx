@@ -1,14 +1,16 @@
 // @ts-nocheck
 import {useEffect, useState, useContext} from 'react'
 import _ from 'lodash'
-import {redirect} from 'react-router-dom'
+import {redirect, useParams} from 'react-router-dom'
 
 import ArticleForm from 'components/articleForm'
 import useFetch from 'hooks/useFetch'
 import {CurrentUserContext} from 'contexts/currentUser'
 
-const EditArticle = ({match}) => {
-  const slug = match.params.slug
+const EditArticle = () => {
+  const params = useParams()
+  const slug = params.slug
+
   const apiUrl = `/articles/${slug}`
   const [{response: fetchArticleResponse}, doFetchArticle] = useFetch(apiUrl)
   const [
