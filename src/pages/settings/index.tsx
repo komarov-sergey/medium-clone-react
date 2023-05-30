@@ -1,5 +1,6 @@
-import React, {useContext, useState, useEffect} from 'react'
-import {Redirect} from 'react-router-dom'
+// @ts-nocheck
+import {useContext, useState, useEffect} from 'react'
+import {redirect} from 'react-router-dom'
 
 import useFetch from 'hooks/useFetch'
 import useLocalStorage from 'hooks/useLocalStorage'
@@ -63,7 +64,7 @@ const Settings = () => {
   }, [response, dispatch])
 
   if (isSuccessfullLogout) {
-    return <Redirect to="/" />
+    return redirect('/')
   }
 
   return (

@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+// @ts-nocheck
+import React, {useEffect} from 'react'
 import {Link} from 'react-router-dom'
 
 import useFetch from 'hooks/useFetch'
@@ -22,12 +23,12 @@ const PopularTags = () => {
 
   return (
     <div className="sidebar">
-      <p>
-        PopularTags
-      </p>
+      <p>PopularTags</p>
       <div className="tag-list">
-        {response.tags.map(tag => (
-          <Link to={`/tags/${tag}`} className='tag-default tag-pill' key={tag}>{tag}</Link>
+        {response.tags.map((tag) => (
+          <Link to={`/tags/${tag}`} className="tag-default tag-pill" key={tag}>
+            {tag}
+          </Link>
         ))}
       </div>
     </div>

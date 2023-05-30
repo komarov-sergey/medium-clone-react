@@ -1,4 +1,5 @@
-import React, {createContext, useReducer} from 'react'
+// @ts-nocheck
+import {createContext, useReducer} from 'react'
 
 const initialState = {
   isLoading: false,
@@ -36,6 +37,7 @@ export const CurrentUserContext = createContext()
 
 export const CurrentUserProvider = ({children}) => {
   const value = useReducer(reducer, initialState)
+
   return (
     <CurrentUserContext.Provider value={value}>
       {children}

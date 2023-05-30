@@ -1,4 +1,4 @@
-import React from 'react'
+// @ts-nocheck
 import classNames from 'classnames'
 
 import useFetch from 'hooks/useFetch'

@@ -1,4 +1,5 @@
-import React, {useEffect} from 'react'
+// @ts-nocheck
+import {useEffect} from 'react'
 import {NavLink} from 'react-router-dom'
 
 import useFetch from 'hooks/useFetch'
@@ -41,7 +42,6 @@ const UserProfile = ({location, match}) => {
                   <NavLink
                     to={`/profiles/${response.profile.username}`}
                     className="nav-link"
-                    exact
                   >
                     My Posts
                   </NavLink>

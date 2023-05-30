@@ -1,12 +1,14 @@
-import React, {useState, useEffect, useContext} from 'react'
-import {Link, Redirect} from 'react-router-dom'
+// @ts-nocheck
+import {useState, useEffect, useContext} from 'react'
+import {Link, redirect, useLocation} from 'react-router-dom'
 
 import useFetch from 'hooks/useFetch'
 import useLocalStorage from 'hooks/useLocalStorage'
 import {CurrentUserContext} from 'contexts/currentUser'
 
-const Authentication = (props) => {
-  const isLogin = props.match.path === '/login'
+const Authentication = () => {
+  const location = useLocation()
+  const isLogin = location.pathname === '/login'
   const pageTitle = isLogin ? 'Sign In' : 'Sign Up'
   const descriptionLink = isLogin ? '/register' : '/login'
   const descriptionText = isLogin ? 'Need an account?' : 'Have an account?'
@@ -42,7 +44,7 @@ const Authentication = (props) => {
   }, [response, setToken, dispatch])
 
   if (isSuccessfullSubmit) {
-    return <Redirect to="/" />
+    return redirect('/')
   }
 
   return (

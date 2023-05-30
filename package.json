@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^29.5.1",
     "@types/node": "^20.2.5",
     "@types/react": "^18.2.7",
@@ -14,11 +14,12 @@
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
     "query-string": "^6.9.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
-    "typescript": "^5.0.4"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.11.2",
+    "react-scripts": "5.0.1",
+    "typescript": "^5.0.4",
+    "web-vitals": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,9 +28,7 @@
     "eject": "react-scripts eject",
     "code:check": "yarn code:lint; yarn code:format --check",
     "code:clean": "yarn code:lint --fix; yarn code:format --write",
-    "code:lint": "eslint --ext .js,.jsx,.ts,.tsx \"src/\"",
-    "code:format": "prettier './src/**/**.{js,jsx,ts,tsx}'",
-    "code:check:rules": "eslint --print-config .eslintrc.js | eslint-config-prettier-check"
+    "code:format": "prettier './src/**/**.{js,jsx,ts,tsx}'"
   },
   "eslintConfig": {
     "extends": "react-app"

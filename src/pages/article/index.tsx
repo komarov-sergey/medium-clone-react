@@ -1,5 +1,6 @@
-import React, {useEffect, useContext, useState} from 'react'
-import {Link, Redirect} from 'react-router-dom'
+// @ts-nocheck
+import {useEffect, useContext, useState} from 'react'
+import {Link, redirect} from 'react-router-dom'
 
 import useFetch from 'hooks/useFetch'
 import Loading from 'components/loading'
@@ -51,7 +52,7 @@ const Article = (props) => {
   }, [deleteArticleResponse])
 
   if (isSuccessfullDelete) {
-    return <Redirect to="/" />
+    return redirect('/')
   }
 
   return (

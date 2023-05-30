@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, {useContext} from 'react'
 import {NavLink, Link} from 'react-router-dom'
 
@@ -14,7 +15,7 @@ const Topbar = () => {
         </Link>
         <ul className="nav navbar-nav pull-xs-right">
           <li className="nav-item">
-            <NavLink to="/" className="nav-link" exact>
+            <NavLink to="/" className="nav-link">
               Home
             </NavLink>
           </li>

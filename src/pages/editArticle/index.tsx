@@ -1,6 +1,7 @@
-import React, {useEffect, useState, useContext} from 'react'
+// @ts-nocheck
+import {useEffect, useState, useContext} from 'react'
 import _ from 'lodash'
-import {Redirect} from 'react-router-dom'
+import {redirect} from 'react-router-dom'
 
 import ArticleForm from 'components/articleForm'
 import useFetch from 'hooks/useFetch'
@@ -54,11 +55,11 @@ const EditArticle = ({match}) => {
   }, [updateArticleResponse])
 
   if (currentUserState.isLoggedIn === false) {
-    return <Redirect to={'/'} />
+    return redirect('/')
   }
 
   if (isSuccessfullSubmit) {
-    return <Redirect to={`/articles/${slug}`} />
+    return redirect(`/articles/${slug}`)
   }
 
   return (

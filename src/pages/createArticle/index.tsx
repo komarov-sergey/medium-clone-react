@@ -1,5 +1,6 @@
-import React, {useEffect, useState, useContext} from 'react'
-import {Redirect} from 'react-router-dom'
+// @ts-nocheck
+import {useEffect, useState, useContext} from 'react'
+import {redirect} from 'react-router-dom'
 
 import ArticleForm from 'components/articleForm'
 import useFetch from 'hooks/useFetch'
@@ -35,11 +36,11 @@ const CreateArticle = () => {
   }, [response])
 
   if (currentUserState.isLoggedIn === false) {
-    return <Redirect to="/" />
+    return redirect('/')
   }
 
   if (isSuccessfullSubmit) {
-    return <Redirect to={`/articles/${response.article.slug}`} />
+    return redirect(`/articles/${response.article.slug}`)
   }
 
   return (

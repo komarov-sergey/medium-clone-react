@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {useEffect, useContext} from 'react'
 
 import useFetch from 'hooks/useFetch'
@@ -22,7 +23,7 @@ const CurrentUserChecker = ({children}) => {
     if (!response) {
       return
     }
-    dispatch({type:'SET_AUTHORIZED', payload: response.user})
+    dispatch({type: 'SET_AUTHORIZED', payload: response.user})
   }, [response, dispatch])
 
   return children

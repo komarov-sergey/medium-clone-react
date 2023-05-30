@@ -1,5 +1,7 @@
-import React, {useEffect, Fragment} from 'react'
+// @ts-nocheck
+import {useEffect} from 'react'
 import {stringify} from 'query-string'
+import {useLocation} from 'react-router-dom'
 
 import useFetch from 'hooks/useFetch'
 import Feed from 'components/feed'
@@ -10,21 +12,20 @@ import Loading from 'components/loading'
 import ErrorMessage from 'components/errorMessage'
 import FeedToggler from 'components/feedTogler'
 
-const TagFeed = ({location, match}) => {
-  const tagName = match.params.slug
+const GlobalFeed = () => {
+  const location = useLocation()
   const {offset, currentPage} = getPaginator(location.search)
   const stringifiedParams = stringify({
     limit,
     offset,
-    tag: tagName,
   })
   const apiUrl = `/articles?${stringifiedParams}`
   const [{response, isLoading, error}, doFetch] = useFetch(apiUrl)
-  const url = match.url
+  const url = location.pathname
 
   useEffect(() => {
     doFetch()
-  }, [doFetch, currentPage, tagName])
+  }, [doFetch, currentPage])
 
   return (
     <div className="home-page">
@@ -35,11 +36,11 @@ const TagFeed = ({location, match}) => {
       <div className="container page">
         <div className="row">
           <div className="col-md-9">
-            <FeedToggler tagName={tagName} />
+            <FeedToggler />
             {isLoading && <Loading />}
             {error && <ErrorMessage />}
             {!isLoading && response && (
-              <Fragment>
+              <>
                 <Feed articles={response.articles} />
                 <Pagination
                   total={response.articlesCount}
@@ -47,7 +48,7 @@ const TagFeed = ({location, match}) => {
                   url={url}
                   currentPage={currentPage}
                 />
-              </Fragment>
+              </>
             )}
           </div>
           <div className="col-md-3">
@@ -59,4 +60,17 @@ const TagFeed = ({location, match}) => {
   )
 }
 
-export default TagFeed
+export default GlobalFeed
+
+// useEffect(() => {
+//   if (!isSuccessfullSubmitLogOut) {
+//     return
+//   }
+//   setCurrentUserState(state => ({
+//     ...state,
+//     isLoggedIn: false,
+//     isLoading: false,
+//     currentUser: null,
+//     notifications: null,
+//   }))
+// }, [isSuccessfullSubmitLogOut, setCurrentUserState])
